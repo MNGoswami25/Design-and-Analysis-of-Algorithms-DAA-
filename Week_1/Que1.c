@@ -20,7 +20,7 @@ int main(){
         for(int j=0;j<n;j++){
             scanf("%d",&arr[j]);
         }
-        printf("Enter key to be Searched : ");
+        printf("Enter key to Search : ");
         scanf("%d",&k);
         int c=linear_search(arr,k,n);
         if(c!=n){
