@@ -1,5 +1,5 @@
-/*Given an unsorted array of positive integers, design an algorithm and implement it using a
-program to find whether there are any duplicate elements in the array or not. (use sorting) (Time
+/*Given an unsorted array of integers, design an algorithm and implement it using a program to
+find whether two elements exist such that their sum is equal to the given key element. (Time
 Complexity = O(n log n))*/
 #include<stdio.h>
 void max_heapify(int A[],int n,int i){
@@ -45,38 +45,31 @@ int main(){
             scanf("%d",&arr[j]);
         }
         heapSort(arr,n);
-        for(int j=0;j<n;j++){
-            printf("%d ",arr[j]);
+        int key;
+        printf("Enter key : ");
+        scanf("%d",&key);
+        int k=n-1,j=0,flag=0;
+        while(j<k){
+            if(arr[j]+arr[k]==key){
+                flag=1;
+                break;
+            }
+            else if(arr[j]+arr[k]<key){
+                j++;
+            }
+            else{
+                k--;
+            }
         }
-
-    }
-}
-
-
-
-
-int Find(int* A,int n){
-   
-}
-int main(){
-    int t,n,arr[50];
-    printf("Enter Number of test Cases: ");
-    scanf("%d",&t);
-    for(int i=0;i<t;i++){
-        s=0,c=0;
-        printf("Enter Size of an Array : ");
-        scanf("%d",&n);
-        printf("Enter Elements\n");
-        for(int j=0;j<n;j++){
-            scanf("%d",&arr[j]);
-        }
-        int m=Find(arr,n);
-        if(m!=-1){
-            printf("YES");
+        if(flag==1){
+            printf("%d  %d",arr[j],arr[k]);
         }
         else{
-            printf("NO");
+            printf("No Such Element Exixt");
         }
+        
 
     }
 }
+
+
