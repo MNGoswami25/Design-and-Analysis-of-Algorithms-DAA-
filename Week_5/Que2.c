@@ -65,7 +65,7 @@ int main(){
             printf("%d  %d",arr[j],arr[k]);
         }
         else{
-            printf("No Such Element Exixt");
+            printf("No Such Element Exist");
         }
         
 
