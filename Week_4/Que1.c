@@ -7,18 +7,18 @@ int s,c;
 void merge(int A[], int p, int q, int r){
     int n1 = q - p + 1;
     int n2 = r - q;
-    int L[n1], R[n2];
+    int L[n1+1], R[n2+1];
     for (int i = 0; i < n1; i++){
         L[i] = A[p + i];
     }
     for (int j = 0; j < n2; j++){
         R[j] = A[q + j + 1];
     }
-    L[n1] = 2147483647;
-    R[n2] = 2147483647;
+    L[n1] = 2147483;
+    R[n2] = 2147483;
     int i = 0;
     int j = 0;
-    for (int k = p; k <= r; k++){
+    for (int k = p; k <= r; k++){  
         if (L[i] <= R[j]){
             A[k] = L[i];
             i++;
@@ -26,7 +26,9 @@ void merge(int A[], int p, int q, int r){
         else{
             A[k] = R[j];
             j++;
+            s++;
         }
+        c++;
     }
 }
 
@@ -60,7 +62,7 @@ int main(){
         }
         printf("\n");
         printf("\ncomparisons: %d",c);
-      printf("\nshift: %d\n",s);
+      printf("\nInversion: %d\n",s);
 
     }
     return 0;
