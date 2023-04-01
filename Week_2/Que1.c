@@ -31,7 +31,6 @@ int main(){
         }
         else{
             printf("Key %d not present. \n",k);
-            printf("Total comparision %d\n",count);
         }
     }
 }
