@@ -14,21 +14,28 @@ Jump Search*/
 #include<math.h>
 int jumpSearch(int arr[], int k, int n,int* c){
     *c=0;
-    int block_size = sqrt(n);
-    int left = 0;
-    int right = block_size;
-    while (right <n && k>arr[left] && k>arr[right]) {
+    if(k<arr[0] ||k>arr[n-1]){
         *c=*c+1;
-        left = right;
-        right =right+block_size;
+        return -1;
     }
-    for (int i = left; i<=right; i++) {
-         *c=*c+1;
-        if (arr[i] == k) {
-            return i;
+    else{
+        int block_size = sqrt(n);
+         int left = 0;
+        int right = block_size;
+        while (k>arr[right]&& right<n) {
+            *c=*c+1;
+            left = right;
+            right =right+block_size;
         }
-    }
-    return -1;
+        for (int i = left; i<=right; i++) {
+            *c=*c+1;
+            if (arr[i] == k) {
+                return i;
+            }
+        }
+        return -1;
+     }
+    
 }
 int main(){
     int t,n,arr[50],k,cmp=0;
