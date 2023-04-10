@@ -1,41 +1,31 @@
 /*Given an unsorted array of integers, design an algorithm and implement it using a program to
 find Kth smallest or largest element in the array. (Worst case Time Complexity = O(n))*/
 #include <stdio.h>
-void swap(int* a, int* b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-int partition(int arr[], int low, int high) {
-    int pivot = arr[high];
-    int i = low - 1;
-
-    for (int j = low; j < high; j++) {
-        if (arr[j] <= pivot) {
-            i++;
-            swap(&arr[i], &arr[j]);
-        }
+void countsort(int arr[],int n,int max,int b[])
+{
+    int i=0;
+    int c[max];
+    for(i=0;i<=max;i++)
+    {
+        c[i]=0;
     }
-    swap(&arr[i + 1], &arr[high]);
-    return i + 1;
-}
-int quick_select(int arr[], int low, int high, int k) {
-    if (low == high) {
-        return arr[low];
+    for(i=0;i<n;i++)
+    {
+       c[arr[i]]=c[arr[i]]+1;
     }
-    int pivot = partition(arr, low, high);
-    int pivot_rank = pivot - low + 1;
-    if (k == pivot_rank) {
-        return arr[pivot];
-    } else if (k < pivot_rank) {
-        return quick_select(arr, low, pivot - 1, k);
-    } else {
-        return quick_select(arr, pivot + 1, high, k - pivot_rank);
+    for(i=1;i<=max;i++)
+    {
+        c[i]=c[i]+c[i-1];
+    }
+    for(i=n-1;i>=0;i--)
+    {
+       c[arr[i]]--;
+        b[c[arr[i]]]=arr[i];
+         
     }
 }
-
 int main() {
-     int t,n,arr[50],k;
+     int t,n,arr[50],k,b[50],j;
     printf("Enter Number of test Cases: ");
     scanf("%d",&t);
     for(int i=0;i<t;i++){
@@ -47,8 +37,17 @@ int main() {
         }
         printf("Enter the value of k: ");
         scanf("%d",&k);
-    int kth_smallest = quick_select(arr, 0, n- 1, k);
-    printf("%d\n",kth_smallest);
-}
+        int max=arr[0];
+        for(j=0;j<n;j++)
+        {
+            if(arr[j]>max)
+            {
+                max=arr[j];
+            }
+        }
+         countsort(arr,n,max,b);
+        printf("\nKth Smallest : %d\n",b[k-1]);
+        printf("Kth largest: %d\n",b[n-k-1]);
+    }
 
 }
