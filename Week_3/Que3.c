@@ -2,80 +2,62 @@
 program to find whether there are any duplicate elements in the array or not. (use sorting) (Time
 Complexity = O(n log n))*/
 #include<stdio.h>
-void max_heapify(int A[],int n,int i){
-    int l = 2 * i + 1;
-    int r = 2 * i + 2,largest=i;
-    if(l<n && A[l]>A[largest]){
-        largest=l;
+void merge(int A[], int p, int q, int r){
+    int n1 = q - p + 1;
+    int n2 = r - q;
+    int L[n1+1], R[n2+1];
+    for (int i = 0; i < n1; i++){
+        L[i] = A[p + i];
     }
-    if(r<n && A[r]>A[largest]){
-        largest=r;
+    for (int j = 0; j < n2; j++){
+        R[j] = A[q + j + 1];
     }
-    if(largest!=i){
-        int temp=A[i];
-        A[i]=A[largest];
-        A[largest]=temp;
-        max_heapify(A,n, largest);
+    L[n1] = 2147483;
+    R[n2] = 2147483;
+    int i = 0;
+    int j = 0;
+    for (int k = p; k <= r; k++){  
+        if (L[i] <= R[j]){
+            A[k] = L[i];
+            i++;
+        }
+        else{
+            A[k] = R[j];
+            j++;
+        }
+        
     }
 }
-   
-void build_max_heap(int A[],int n){
-    for(int i=n/2-1;i>=0;i--){
-        max_heapify(A,n,i);
+
+void mergeSort(int A[], int l, int r){
+    if (l < r){
+        int m = l + (r - l) / 2;
+        mergeSort(A, l, m);
+        mergeSort(A, m + 1, r);
+        merge(A, l, m, r);
     }
-}
-void heapSort(int A[],int n){
-   build_max_heap(A,n);
-   for(int i=n-1;i>0;i--){
-        int temp=A[0];
-        A[0]=A[i];
-        A[i]=temp;
-        max_heapify(A,i,0);
-   }
 }
 int main(){
-    int t,n,arr[50];
+    int t,n,arr[50],j,i;
     printf("Enter Number of test Cases: ");
     scanf("%d",&t);
-    for(int i=0;i<t;i++){
-        printf("\nEnter Size of an Array : ");
-        scanf("%d",&n);
-        printf("Enter Elements\n");
-        for(int j=0;j<n;j++){
-            scanf("%d",&arr[j]);
-        }
-        heapSort(arr,n);
-        for(int j=0;j<n;j++){
-            printf("%d ",arr[j]);
-        }
-
-    }
-}
-
-
-
-
-int Find(int* A,int n){
-   
-}
-int main(){
-    int t,n,arr[50];
-    printf("Enter Number of test Cases: ");
-    scanf("%d",&t);
-    for(int i=0;i<t;i++){
-        s=0,c=0;
+    for(i=0;i<t;i++){
         printf("Enter Size of an Array : ");
         scanf("%d",&n);
         printf("Enter Elements\n");
-        for(int j=0;j<n;j++){
+        for(j=0;j<n;j++){
             scanf("%d",&arr[j]);
         }
-        int m=Find(arr,n);
-        if(m!=-1){
-            printf("YES");
+        mergeSort(arr, 0, n - 1);
+        for(j=0;j<n-1;j++){
+            
+            if(arr[j]==arr[j+1]){
+                printf("YES\n");
+                break;
+            }
         }
-        else{
-            printf("NO");
+        if(j==n-1){
+            printf("NO\n");
         }
 
     }
