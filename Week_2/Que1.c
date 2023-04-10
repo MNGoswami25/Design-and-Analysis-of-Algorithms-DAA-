@@ -1,16 +1,31 @@
 /*Given a sorted array of positive integers containing few duplicate elements, design an algorithm
 and implement it using a program to find whether the given key element is present in the array or
-not. If present, then also find the number of copies of given key. (Time Complexity = O(log n))*/#include<stdio.h>
-int linear_search(int* A,int k,int n,int* count){
-    int i,flag=-1;
-    *count=0;
-    for(i=0;i<n;i++){
-        if(A[i]==k){
-            flag=0;
-            *count=*count+1;
+not. If present, then also find the number of copies of given key. (Time Complexity = O(log n))*/
+#include<stdio.h>
+int binarySearch(int arr[], int n, int key) {
+    int low = 0, high = n - 1;
+    int count = 0;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (arr[mid] == key) {
+            count++;
+            int left = mid - 1, right = mid + 1;
+            while (left >= 0 && arr[left] == key) {
+                count++;
+                left--;
+            }
+            while (right < n && arr[right] == key) {
+                count++;
+                right++;
+            }
+            return count;
         }
+        else if (arr[mid] > key)
+            high = mid - 1;
+        else
+            low = mid + 1;
     }
-    return flag;
+    return 0;
 }
 int main(){
     int t,n,arr[50],k,count;
@@ -25,12 +40,13 @@ int main(){
         }
         printf("Enter key to  Search : ");
         scanf("%d",&k);
-        int c=linear_search(arr,k,n,&count);
-        if(c!=-1){
-            printf("%d -> %d\n",k,count);
+         int c = binarySearch(arr, n, k);
+        if(c!=0){
+            printf("%d -> %d\n",k,c);
         }
         else{
             printf("Key %d not present. \n",k);
         }
     }
 }
+

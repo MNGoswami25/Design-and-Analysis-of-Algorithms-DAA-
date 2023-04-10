@@ -1,6 +1,6 @@
 /*Given an already sorted array of positive integers, design an algorithm and implement it using a
 program to find whether given key element is present in the array or not. Also, find total number
-of comparisons for each input case. (Time Complexity = O(nlogn), where n is the size of input).*/
+of comparisons for each input case. (Time Complexity = O(logn), where n is the size of input).*/
 #include<stdio.h>
 int binarySearch(int arr[], int k, int n,int* c){
     int start = 0, end = n - 1, mid;
