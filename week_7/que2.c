@@ -1,3 +1,8 @@
+/*Design an algorithm and implement it using a program to solve previous question's problem
+using Bellman- Ford's shortest path algorithm.*/
+
+// Bellman ford's algorithm
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>

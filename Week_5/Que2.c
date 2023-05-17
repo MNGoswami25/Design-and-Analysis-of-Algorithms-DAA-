@@ -45,6 +45,9 @@ int main(){
             scanf("%d",&arr[j]);
         }
         heapSort(arr,n);
+        for(int i=0;i<n;i++){
+            printf("%d ",arr[i]);
+        }
         int key;
         printf("Enter key : ");
         scanf("%d",&key);
