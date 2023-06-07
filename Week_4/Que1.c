@@ -61,8 +61,8 @@ int main(){
             printf("%d ", arr[j]);
         }
         printf("\n");
-        printf("\ncomparisons: %d",c);
-      printf("\nInversion: %d\n",s);
+        printf("comparisons: %d",c);
+      printf("Inversion: %d\n",s);
 
     }
     return 0;
